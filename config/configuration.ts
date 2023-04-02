@@ -6,5 +6,6 @@ export default () => ({
     user: process.env.DB_USERNAME,
     ssl: Boolean(process.env.DB_SSL) || false,
     sslCA: process.env.DB_SSL_CA_FILE_PATH,
+    connectTimeoutMS: 1000,
   },
 });
