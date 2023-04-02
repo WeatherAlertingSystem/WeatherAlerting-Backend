@@ -1,9 +1,22 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule, MongooseOptionsFactory } from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UserModule } from './user/user.module';
+import configuration from 'config/configuration';
 
 @Module({
-  imports: [],
+  imports: [
+    ConfigModule.forRoot({ load: [configuration] }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) =>
+        configService.get<MongooseOptionsFactory>('database'),
+    }),
+    UserModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
