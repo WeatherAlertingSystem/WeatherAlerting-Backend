@@ -15,5 +15,6 @@ import { WeatherTriggerService } from './weather-trigger.service';
   ],
   controllers: [WeatherTriggerController],
   providers: [WeatherTriggerService],
+  exports: [WeatherTriggerService],
 })
 export class WeatherTriggerModule {}

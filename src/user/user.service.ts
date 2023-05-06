@@ -17,4 +17,12 @@ export class UserService {
   async findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
+
+  // async addSubscriptionToUser(
+  //   subscriptionID: number,
+  //   userID: string,
+  // ): Promise<void> {
+  //   const myUser = await this.userModel.findById(userID).exec();
+  //   myUser.subscriptions.push(subscriptionID);
+  // }
 }
