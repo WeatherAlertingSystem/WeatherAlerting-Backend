@@ -1,4 +1,4 @@
-FROM node:16-alpine AS development
+FROM node:16 AS development
 
 # Specify our working directory inside the container
 WORKDIR /usr/src/weather-alerting-backend
@@ -13,8 +13,6 @@ COPY . .
 RUN npm run build
 RUN wget -P /etc/ssl/ https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
 
-# Install git - needed for development in .devcontainer
-RUN apk add --no-cache git
 
 ####################
 #   PRODUCTION     #
