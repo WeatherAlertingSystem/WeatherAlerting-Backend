@@ -1,0 +1,33 @@
+version: '3'
+services:
+  weather-alerting-backend:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      # This will build only development stage from Dockerfile
+      target: development
+    container_name: weather-alerting-backend
+    # Mount our host directory to the container directory (HOT-RELOAD!)
+    volumes:
+      - .:/usr/src/weather-alerting-backend
+    # Start nodeJS app in --watch mode.
+    command: npm run start:dev
+    env_file:
+      - ./.env
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+    restart: always
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    env_file:
+      - ./.env
+    ports:
+     - 27017:27017
+    volumes:
+     - weather-alerting-dbdata:/data/db
+volumes:
+  weather-alerting-dbdata:
+    driver: local
