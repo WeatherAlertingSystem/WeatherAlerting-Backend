@@ -4,6 +4,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
+import { AdminModule } from './admin/admin.module';
+import { WeatherTriggerModule } from './weather-trigger/weather-trigger.module';
+import { WeatherEngineModule } from './weather-engine/weather-engine.module';
 import configuration from 'config/configuration';
 
 @Module({
@@ -16,6 +19,9 @@ import configuration from 'config/configuration';
         configService.get<MongooseOptionsFactory>('database'),
     }),
     UserModule,
+    AdminModule,
+    WeatherTriggerModule,
+    WeatherEngineModule,
   ],
   controllers: [AppController],
   providers: [AppService],

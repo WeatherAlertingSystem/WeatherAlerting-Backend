@@ -8,4 +8,7 @@ export default () => ({
     sslCA: process.env.DB_SSL_CA_FILE_PATH,
     connectTimeoutMS: 1000,
   },
+  weatherApi: {
+    apiKey: process.env.WEATHERAPI_APIKEY,
+  },
 });
