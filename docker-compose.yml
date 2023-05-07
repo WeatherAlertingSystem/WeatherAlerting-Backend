@@ -25,9 +25,9 @@ services:
     env_file:
       - ./.env
     ports:
-     - 27017:27017
+      - 27017:27017
     volumes:
-     - weather-alerting-dbdata:/data/db
+      - weather-alerting-dbdata:/data/db
 volumes:
   weather-alerting-dbdata:
     driver: local
