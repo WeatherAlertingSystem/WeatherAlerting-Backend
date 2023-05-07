@@ -9,6 +9,7 @@ export default () => ({
     connectTimeoutMS: 1000,
   },
   weatherApi: {
+    baseUrl: 'https://api.openweathermap.org/data/2.5/forecast',
     apiKey: process.env.WEATHERAPI_APIKEY,
   },
 });
