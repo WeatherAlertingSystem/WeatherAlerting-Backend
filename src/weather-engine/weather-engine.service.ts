@@ -12,6 +12,7 @@ import {
   getWeatherItemIndexForOffset,
   isConditionFulfilled,
 } from './weather-engine.utils';
+import { NotifierService } from './notifier/notifier.service';
 
 @Injectable()
 export class WeatherEngineService {
@@ -20,6 +21,7 @@ export class WeatherEngineService {
     private geocodingService: GeocodingService,
     private config: ConfigService,
     private weatherTriggerService: WeatherTriggerService,
+    private notifierService: NotifierService,
   ) {
     this.test();
   }
@@ -88,16 +90,7 @@ export class WeatherEngineService {
       )
     ) {
       //send Notification
-      this.sendNotifications(trigger, forecastedValue);
+      this.notifierService.sendNotifications(trigger, forecastedValue);
     }
-  }
-
-  async sendNotifications(trigger: WeatherTrigger, forecastedValue: number) {
-    trigger.notification.forEach((notification) => {
-      console.log(`Sending notification to ${notification.recipient}`);
-      console.log(
-        `Notification: Hello, in ${trigger.offset_time} in ${trigger.location} the ${trigger.type} will be ${trigger.condition} ${trigger.threshold}. Forecasted value: ${forecastedValue}`,
-      );
-    });
   }
 }
