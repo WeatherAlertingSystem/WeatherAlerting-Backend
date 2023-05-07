@@ -1,0 +1,32 @@
+{
+    "name": "WeatherAlerting Backend",
+    // Update the 'dockerComposeFile' list if you have more compose files or use different names.
+    "dockerComposeFile": [
+        "../docker-compose.yml"
+    ],
+    // The 'service' property is the name of the service for the container that VS Code should
+    // use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+    "service": "weather-alerting-backend",
+    // The 'workspaceFolder' property is the path VS Code should open by default when
+    // connected. Corresponds to a volume mount in .devcontainer/docker-compose.yml
+    "workspaceFolder": "/usr/src/weather-alerting-backend",
+    // Uncomment the next line to use 'postCreateCommand' to run commands after the container is created.
+    // "postCreateCommand": "uname -a",
+    "shutdownAction": "stopCompose",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"eamodio.gitlens",
+				"yzhang.markdown-all-in-one",
+				"redhat.vscode-yaml",
+				"ms-azuretools.vscode-docker"
+			],
+            "settings": {
+                //Update project settings here when neede.
+            }
+        }
+    },
+    "remoteUser": "root"
+}
