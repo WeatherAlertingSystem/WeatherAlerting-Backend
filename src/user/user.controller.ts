@@ -12,6 +12,7 @@ export class UserController {
     private userService: UserService,
     private weatherTriggerService: WeatherTriggerService,
   ) {}
+
   @Get()
   async findAll(): Promise<User[]> {
     return this.userService.findAll();
