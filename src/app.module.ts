@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule, MongooseOptionsFactory } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule, MongooseOptionsFactory } from '@nestjs/mongoose';
+import configuration from 'config/configuration';
+import { AdminModule } from './admin/admin.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { AdminModule } from './admin/admin.module';
-import { WeatherTriggerModule } from './weather-trigger/weather-trigger.module';
 import { WeatherEngineModule } from './weather-engine/weather-engine.module';
-import configuration from 'config/configuration';
+import { WeatherTriggerModule } from './weather-trigger/weather-trigger.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import configuration from 'config/configuration';
     AdminModule,
     WeatherTriggerModule,
     WeatherEngineModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

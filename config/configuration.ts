@@ -11,4 +11,7 @@ export default () => ({
   weatherApi: {
     apiKey: process.env.WEATHERAPI_APIKEY,
   },
+  jwtModule: {
+    secret: process.env.JWT_SECRET,
+  },
 });
