@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Request } from 'express';
 import { CreateWeatherTriggerDto } from 'src/weather-trigger/dto/create-weather-trigger.dto';
 import { WeatherTrigger } from 'src/weather-trigger/schema/weather-trigger.schema';
 import { WeatherTriggerService } from 'src/weather-trigger/weather-trigger.service';
@@ -26,9 +27,13 @@ export class UserController {
   @Post('create-trigger')
   async createTrigger(
     @Body() weatherTriggerDto: CreateWeatherTriggerDto,
+    @Req() request: Request,
   ): Promise<WeatherTrigger> {
     const newID = await this.weatherTriggerService.create(weatherTriggerDto);
-    this.userService.addSubscriptionToUser(newID, '6456b288539862e332eba0bd');
+    this.userService.addSubscriptionToUser(
+      newID,
+      request['username']['username'],
+    );
     return newID;
   }
 }

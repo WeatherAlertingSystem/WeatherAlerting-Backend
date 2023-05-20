@@ -23,10 +23,16 @@ export class UserService {
     return this.userModel.findOne({ username: `${username}` }).exec();
   }
 
+  async getIdByUserName(username: string): Promise<string> {
+    const user = this.userModel.findOne({ username: `${username}` }).exec();
+    return (await user)._id.toString();
+  }
+
   async addSubscriptionToUser(
     subscriptionID: WeatherTrigger,
-    userID: string, //TODO: In future we should detect user in a better way than string with ID!
+    userName: string,
   ): Promise<void> {
+    const userID = await this.getIdByUserName(userName);
     const myUser = await this.userModel.findById(userID).exec();
     myUser.subscriptions.push(subscriptionID);
     myUser.save();
