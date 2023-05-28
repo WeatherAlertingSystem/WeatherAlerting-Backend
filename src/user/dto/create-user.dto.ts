@@ -4,5 +4,6 @@ export class CreateUserDto {
   password: string;
   email: string;
   phone_number: string;
+  role: string;
   subscriptions: WeatherTrigger[];
 }
