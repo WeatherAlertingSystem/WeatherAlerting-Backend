@@ -14,4 +14,7 @@ export default () => ({
   jwtModule: {
     secret: process.env.JWT_SECRET,
   },
+  hashing: {
+    salt: process.env.HASH_SALT,
+  },
 });
