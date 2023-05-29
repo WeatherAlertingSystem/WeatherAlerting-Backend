@@ -16,9 +16,6 @@ export class User {
   @Prop({ required: false })
   phone_number: string;
 
-  @Prop({ required: false, default: 'user' })
-  role: string;
-
   @Prop({
     required: false,
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'WeatherTrigger' }],

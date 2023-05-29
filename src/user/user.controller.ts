@@ -39,7 +39,7 @@ export class UserController {
     const newID = await this.weatherTriggerService.create(weatherTriggerDto);
     this.userService.addSubscriptionToUser(
       newID,
-      request['username']['username'],
+      request['payload']['username'],
     );
     return newID;
   }

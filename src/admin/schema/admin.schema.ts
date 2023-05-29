@@ -10,9 +10,6 @@ export class Admin {
 
   @Prop({ required: true })
   email: string;
-
-  @Prop({ required: false, default: 'admin' })
-  role: string;
 }
 
 export const AdminSchema = SchemaFactory.createForClass(Admin);
