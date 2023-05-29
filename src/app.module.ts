@@ -8,7 +8,6 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { WeatherEngineModule } from './weather-engine/weather-engine.module';
-import configuration from 'config/configuration';
 import { ScheduleModule } from '@nestjs/schedule';
 import { WeatherTriggerModule } from './weather-trigger/weather-trigger.module';
 
