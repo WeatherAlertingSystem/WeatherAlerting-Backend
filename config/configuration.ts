@@ -12,4 +12,10 @@ export default () => ({
     baseUrl: 'https://api.openweathermap.org/data/2.5/forecast',
     apiKey: process.env.WEATHERAPI_APIKEY,
   },
+  jwtModule: {
+    secret: process.env.JWT_SECRET,
+  },
+  hashing: {
+    salt: process.env.HASH_SALT,
+  },
 });
