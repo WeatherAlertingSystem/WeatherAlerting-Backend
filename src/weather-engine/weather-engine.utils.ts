@@ -1,4 +1,3 @@
-import { WeatherTrigger } from 'src/weather-trigger/schema/weather-trigger.schema';
 import { WeatherDataItem } from './weather-data-item';
 
 export function buildWeatherApiUrl(baseUrl: string, params: any): string {
@@ -15,7 +14,7 @@ export function isConditionFulfilled(
   a: number,
   b: number,
 ): boolean {
-  console.log(cond, a, b);
+  console.log('Condition: ', cond, ', Real: ', a, ', Test against: ', b);
   const x = {
     gte: (a: number, b: number) => {
       return a >= b;

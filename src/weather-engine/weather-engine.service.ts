@@ -23,14 +23,10 @@ export class WeatherEngineService {
     private weatherTriggerService: WeatherTriggerService,
     private notifierService: NotifierService,
   ) {
-    this.test();
+    // this.test();
   }
 
   async test() {
-    // console.log(
-    //   // await this.geocodingService.getCoordinatesForLocation('Wroclaw'),
-    //   // await this.getWeather('Wroclaw'),
-    //   );
     await this.checkTriggersAndAlert();
   }
 
