@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { WeatherEngineModule } from './weather-engine/weather-engine.module';
+import { ScheduleModule } from '@nestjs/schedule';
 import { WeatherTriggerModule } from './weather-trigger/weather-trigger.module';
 
 @Module({
@@ -19,6 +20,7 @@ import { WeatherTriggerModule } from './weather-trigger/weather-trigger.module';
       useFactory: async (configService: ConfigService) =>
         configService.get<MongooseOptionsFactory>('database'),
     }),
+    ScheduleModule.forRoot(),
     UserModule,
     AdminModule,
     WeatherTriggerModule,
