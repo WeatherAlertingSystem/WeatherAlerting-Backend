@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule, MongooseOptionsFactory } from '@nestjs/mongoose';
+import { LoggerModule } from 'nestjs-pino';
 import configuration from 'config/configuration';
 import { AdminModule } from './admin/admin.module';
 import { AppController } from './app.controller';
@@ -19,6 +20,19 @@ import { WeatherTriggerModule } from './weather-trigger/weather-trigger.module';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) =>
         configService.get<MongooseOptionsFactory>('database'),
+    }),
+    LoggerModule.forRoot({
+      pinoHttp: {
+        customProps: (req, res) => ({
+          context: 'HTTP',
+        }),
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            singleLine: true,
+          },
+        },
+      },
     }),
     ScheduleModule.forRoot(),
     UserModule,
