@@ -21,18 +21,10 @@ import { WeatherTriggerModule } from './weather-trigger/weather-trigger.module';
       useFactory: async (configService: ConfigService) =>
         configService.get<MongooseOptionsFactory>('database'),
     }),
-    LoggerModule.forRoot({
-      pinoHttp: {
-        customProps: (req, res) => ({
-          context: 'HTTP',
-        }),
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            singleLine: true,
-          },
-        },
-      },
+    LoggerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => config.get('logger'),
     }),
     ScheduleModule.forRoot(),
     UserModule,

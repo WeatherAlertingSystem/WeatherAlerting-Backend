@@ -18,4 +18,19 @@ export default () => ({
   hashing: {
     salt: process.env.HASH_SALT,
   },
+  logger: {
+    pinoHttp: {
+      customProps: (req, res) => ({
+        context: 'HTTP',
+      }),
+      transport: {
+        target: 'pino-pretty',
+        options: {
+          singleLine: true,
+          colorize: true,
+        },
+      },
+      level: process.env.LOG_LEVEL,
+    },
+  },
 });

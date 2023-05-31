@@ -14,7 +14,6 @@ export function isConditionFulfilled(
   a: number,
   b: number,
 ): boolean {
-  console.log('Condition: ', cond, ', Real: ', a, ', Test against: ', b);
   const x = {
     gte: (a: number, b: number) => {
       return a >= b;

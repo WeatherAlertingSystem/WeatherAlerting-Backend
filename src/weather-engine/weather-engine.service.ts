@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { GeocodingService } from './geocoding.service';
 import { firstValueFrom } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
@@ -16,6 +16,7 @@ import { NotifierService } from './notifier/notifier.service';
 
 @Injectable()
 export class WeatherEngineService {
+  private readonly logger = new Logger(WeatherEngineService.name);
   constructor(
     private readonly httpService: HttpService,
     private geocodingService: GeocodingService,
@@ -51,7 +52,11 @@ export class WeatherEngineService {
 
     for (const trigger of allTriggers) {
       // TODO: Implement caching
-      console.log(trigger.name);
+      this.logger.debug('#####################################');
+      this.logger.log(
+        `Trigger: ${trigger.name}, location: ${trigger.location}`,
+      );
+      this.logger.debug(trigger, 'Trigger: ');
       const forecastList: Array<WeatherDataItem> = (
         await this.getWeather(trigger.location)
       ).list;
@@ -77,6 +82,10 @@ export class WeatherEngineService {
 
   async checkAlert(trigger: WeatherTrigger, weatherItem: WeatherDataItem) {
     const forecastedValue = getValueForTriggerType(trigger.type, weatherItem);
+
+    this.logger.log(
+      `Condition: ${trigger.condition}, Forecasted: ${forecastedValue}, Test against: ${trigger.threshold}`,
+    );
 
     if (
       isConditionFulfilled(
