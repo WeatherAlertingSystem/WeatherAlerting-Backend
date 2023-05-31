@@ -7,6 +7,9 @@ async function bootstrap() {
     abortOnError: false,
     bufferLogs: true,
   });
+
+  app.setGlobalPrefix('/api/v1');
+
   // TODO: Configure CORS to allow only for frontend's origin
   // https://github.com/expressjs/cors#configuration-options
   app.enableCors();

@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { WeatherTrigger } from 'src/weather-trigger/schema/weather-trigger.schema';
 import mongoose from 'mongoose';
+import { WeatherTrigger } from 'src/weather-trigger/schema/weather-trigger.schema';
 
 @Schema({ timestamps: true })
 export class User {
