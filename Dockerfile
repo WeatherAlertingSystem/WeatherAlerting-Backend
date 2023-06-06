@@ -9,6 +9,8 @@ COPY package*.json ./
 # Install all dependencies
 RUN npm install
 RUN npm install -g @nestjs/cli
+RUN apt-get update && apt-get install -y python3-pip
+RUN pip3 install pre-commit
 
 COPY . .
 RUN npm run build
