@@ -1,18 +1,18 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
-import { GeocodingService } from './geocoding.service';
-import { firstValueFrom } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
-import { WeatherTriggerService } from 'src/weather-trigger/weather-trigger.service';
+import { firstValueFrom } from 'rxjs';
+import { WeatherTrigger } from '../../src/weather-trigger/schema/weather-trigger.schema';
+import { WeatherTriggerService } from '../../src/weather-trigger/weather-trigger.service';
+import { GeocodingService } from './geocoding.service';
+import { NotifierService } from './notifier/notifier.service';
 import { WeatherDataItem } from './weather-data-item';
-import { WeatherTrigger } from 'src/weather-trigger/schema/weather-trigger.schema';
 import {
   buildWeatherApiUrl,
   getValueForTriggerType,
   getWeatherItemIndexForOffset,
   isConditionFulfilled,
 } from './weather-engine.utils';
-import { NotifierService } from './notifier/notifier.service';
 
 @Injectable()
 export class WeatherEngineService {

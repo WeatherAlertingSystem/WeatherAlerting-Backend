@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
-import { Model } from 'mongoose';
-import { WeatherTrigger } from 'src/weather-trigger/schema/weather-trigger.schema';
+import { Model, ObjectId } from 'mongoose';
+import { WeatherTrigger } from '../../src/weather-trigger/schema/weather-trigger.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './schema/user.schema';
 @Injectable()
@@ -20,6 +20,10 @@ export class UserService {
     );
     const newUser = new this.userModel(createUserDto);
     return newUser.save();
+  }
+
+  async delete(id: ObjectId): Promise<User> {
+    return this.userModel.findOneAndDelete({ _id: id }).exec();
   }
 
   async findAll(): Promise<User[]> {

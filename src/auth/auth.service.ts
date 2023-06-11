@@ -1,8 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { AdminService } from 'src/admin/admin.service';
-import { UserService } from 'src/user/user.service';
+import { AdminService } from '../../src/admin/admin.service';
+import { UserService } from '../../src/user/user.service';
 import { Role } from './models/role.enum';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   async adminSignIn(username: string, pass: string): Promise<any> {
-    const admin = await this.adminService.findOne(username);
+    const admin = await this.adminService.findOneByUsername(username);
     if (admin === null) {
       throw new UnauthorizedException();
     } else {

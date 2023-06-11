@@ -2,8 +2,8 @@ import { Module, forwardRef } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
-import { AdminModule } from 'src/admin/admin.module';
-import { UserModule } from 'src/user/user.module';
+import { AdminModule } from '../../src/admin/admin.module';
+import { UserModule } from '../../src/user/user.module';
 import { AuthController } from './auth.controller';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
@@ -13,7 +13,8 @@ import { RolesGuard } from './guards/roles.guard';
   controllers: [AuthController],
   providers: [
     AuthService,
-    { provide: APP_GUARD, useClass: AuthGuard },
+    { provide: APP_GUARD, useExisting: AuthGuard },
+    AuthGuard,
     RolesGuard,
   ],
   imports: [

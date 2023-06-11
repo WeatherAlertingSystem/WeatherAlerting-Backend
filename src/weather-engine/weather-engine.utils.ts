@@ -1,3 +1,4 @@
+import { TriggerConditions } from '../../src/weather-trigger/models/weather-trigger-conditions.enum';
 import { WeatherDataItem } from './weather-data-item';
 
 export function buildWeatherApiUrl(baseUrl: string, params: any): string {
@@ -15,16 +16,16 @@ export function isConditionFulfilled(
   b: number,
 ): boolean {
   const x = {
-    gte: (a: number, b: number) => {
+    [TriggerConditions.GTE]: (a: number, b: number) => {
       return a >= b;
     },
-    gt: (a: number, b: number) => {
+    [TriggerConditions.GT]: (a: number, b: number) => {
       return a > b;
     },
-    lte: (a: number, b: number) => {
+    [TriggerConditions.LTE]: (a: number, b: number) => {
       return a <= b;
     },
-    lt: (a: number, b: number) => {
+    [TriggerConditions.LT]: (a: number, b: number) => {
       return a < b;
     },
   };
