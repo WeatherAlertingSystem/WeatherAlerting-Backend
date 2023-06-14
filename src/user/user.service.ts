@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import * as bcrypt from 'bcrypt';
-import { Model, ObjectId } from 'mongoose';
-import { WeatherTrigger } from '../../src/weather-trigger/schema/weather-trigger.schema';
+import { Model, ObjectId, Types } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './schema/user.schema';
 @Injectable()
@@ -40,12 +39,30 @@ export class UserService {
   }
 
   async addSubscriptionToUser(
-    subscriptionID: WeatherTrigger,
+    subscriptionID: Types.ObjectId,
     userName: string,
   ): Promise<void> {
     const userID = await this.getIdByUserName(userName);
     const myUser = await this.userModel.findById(userID).exec();
     myUser.subscriptions.push(subscriptionID);
     myUser.save();
+  }
+
+  async removeSubscriptionFromUser(
+    subscriptionID: Types.ObjectId,
+    userName: string,
+  ): Promise<void> {
+    const userID = await this.getIdByUserName(userName);
+    this.userModel
+      .findByIdAndUpdate(
+        userID,
+        {
+          $pull: {
+            subscriptions: subscriptionID,
+          },
+        },
+        { safe: true },
+      )
+      .exec();
   }
 }

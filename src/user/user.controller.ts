@@ -14,7 +14,10 @@ import { Roles } from '../../src/auth/decorators/roles.decorator';
 import { RolesGuard } from '../../src/auth/guards/roles.guard';
 import { Role } from '../../src/auth/models/role.enum';
 import { CreateWeatherTriggerDto } from '../../src/weather-trigger/dto/create-weather-trigger.dto';
-import { WeatherTrigger } from '../../src/weather-trigger/schema/weather-trigger.schema';
+import {
+  WeatherTrigger,
+  WeatherTriggerDocument,
+} from '../../src/weather-trigger/schema/weather-trigger.schema';
 import { WeatherTriggerService } from '../../src/weather-trigger/weather-trigger.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './schema/user.schema';
@@ -53,11 +56,13 @@ export class UserController {
     @Body() weatherTriggerDto: CreateWeatherTriggerDto,
     @Req() request: Request,
   ): Promise<WeatherTrigger> {
-    const newID = await this.weatherTriggerService.create(weatherTriggerDto);
+    const newTrigger = (await this.weatherTriggerService.create(
+      weatherTriggerDto,
+    )) as WeatherTriggerDocument;
     this.userService.addSubscriptionToUser(
-      newID,
+      newTrigger._id,
       request['payload']['username'],
     );
-    return newID;
+    return newTrigger;
   }
 }

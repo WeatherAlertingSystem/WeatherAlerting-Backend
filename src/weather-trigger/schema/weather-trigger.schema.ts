@@ -1,10 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { HydratedDocument } from 'mongoose';
 import { TriggerConditions } from '../models/weather-trigger-conditions.enum';
 import { TriggerTypes } from '../models/weather-trigger-types.enum';
 import {
   WeatherNotification,
   WeatherNotificationSchema,
 } from './weather-notification.schema';
+
+export type WeatherTriggerDocument = HydratedDocument<WeatherTrigger>;
 
 @Schema({ timestamps: true })
 export class WeatherTrigger {

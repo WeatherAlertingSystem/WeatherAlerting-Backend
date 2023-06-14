@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 import { ExcludeProperty } from 'nestjs-mongoose-exclude';
-import { WeatherTrigger } from '../../../src/weather-trigger/schema/weather-trigger.schema';
 
 @Schema({ timestamps: true })
 export class User {
@@ -22,7 +21,7 @@ export class User {
     required: false,
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'WeatherTrigger' }],
   })
-  subscriptions: WeatherTrigger[];
+  subscriptions: Types.ObjectId[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

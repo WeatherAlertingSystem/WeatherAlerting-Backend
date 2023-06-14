@@ -1,3 +1,4 @@
+import { TriggerTypes } from 'src/weather-trigger/models/weather-trigger-types.enum';
 import { TriggerConditions } from '../../src/weather-trigger/models/weather-trigger-conditions.enum';
 import { WeatherDataItem } from './weather-data-item';
 
@@ -37,13 +38,15 @@ export function getValueForTriggerType(
   weatherItem: WeatherDataItem,
 ) {
   const mapping = {
-    temperature: () => {
+    [TriggerTypes.TEMPERATURE]: () => {
       return weatherItem.main.temp;
     },
-    humidity: () => {
+    [TriggerTypes.HUMIDITY]: () => {
       return weatherItem.main.humidity;
     },
   };
+  if (!mapping[triggerType])
+    throw new Error(`Unhandled trigger type ${triggerType}`);
   return mapping[triggerType]();
 }
 
