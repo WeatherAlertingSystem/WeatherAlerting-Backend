@@ -14,6 +14,7 @@ export default () => ({
   },
   jwtModule: {
     secret: process.env.JWT_SECRET,
+    expiresIn: '1d',
   },
   hashing: {
     salt: process.env.HASH_SALT,
@@ -42,5 +43,23 @@ export default () => ({
       },
       level: process.env.LOG_LEVEL,
     },
+  },
+  mailing: {
+    nodemailerConfig: {
+      transport: {
+        host: process.env.SMTP_HOST,
+        port: +process.env.SMTP_PORT,
+        secure: process.env.SMTP_SECURE == 'true' ? true : false,
+        requireTLS: process.env.SMTP_REQUIRE_TLS == 'true' ? true : false,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASSWORD,
+        },
+      },
+      defaults: {
+        from: '"Weather Alerting - No Reply" <no-reply.weather-alerting@horyzont.eu>',
+      },
+    },
+    sendEmails: false,
   },
 });

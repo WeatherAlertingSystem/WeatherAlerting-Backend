@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateWeatherTriggerDto } from './dto/create-weather-trigger.dto';
+import { UpdateWeatherTriggerDto } from './dto/update-weather-trigger.dto';
 import { WeatherTrigger } from './schema/weather-trigger.schema';
 
 @Injectable()
@@ -13,6 +14,17 @@ export class WeatherTriggerService {
 
   async findAll(): Promise<WeatherTrigger[]> {
     return this.weatherTriggerModel.find().exec();
+  }
+
+  async findBySubscriberId(subscriberId: string): Promise<WeatherTrigger[]> {
+    return this.weatherTriggerModel.find({ subscriberId }).exec();
+  }
+
+  async findOne(
+    id: string,
+    subscriberId: string = undefined,
+  ): Promise<WeatherTrigger> {
+    return this.weatherTriggerModel.findOne({ _id: id, subscriberId });
   }
 
   async create(
@@ -27,5 +39,12 @@ export class WeatherTriggerService {
       .findByIdAndRemove(id)
       .exec();
     return deletedTrigger;
+  }
+
+  async update(id: string, updateWeatherTriggerDto: UpdateWeatherTriggerDto) {
+    const updatedTrigger = await this.weatherTriggerModel
+      .findByIdAndUpdate(id, updateWeatherTriggerDto, { new: true })
+      .exec();
+    return updatedTrigger;
   }
 }

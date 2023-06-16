@@ -25,6 +25,7 @@ import { RolesGuard } from './guards/roles.guard';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get<string>('jwtModule.secret'),
+        signOptions: { expiresIn: configService.get('jwtModule.expiresIn') },
       }),
       global: true,
       inject: [ConfigService],
