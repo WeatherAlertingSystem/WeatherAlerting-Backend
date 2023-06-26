@@ -62,4 +62,5 @@ export default () => ({
     },
     sendEmails: false,
   },
+  cronConfig: process.env.CRON_CONFIG,
 });
