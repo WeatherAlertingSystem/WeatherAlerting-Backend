@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Req,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
@@ -36,5 +37,12 @@ export class UserController {
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<User> {
     return this.userService.create(createUserDto);
+  }
+
+  @Roles(Role.USER)
+  @UseGuards(RolesGuard)
+  @Get('me')
+  async findMe(@Req() request): Promise<User> {
+    return this.userService.findOne(request.payload.username);
   }
 }
