@@ -60,7 +60,7 @@ export default () => ({
         from: '"Weather Alerting - No Reply" <no-reply.weather-alerting@horyzont.eu>',
       },
     },
-    sendEmails: false,
+    sendEmails: process.env.SEND_EMAILS == 'true' ? true : false,
   },
   cronConfig: process.env.CRON_CONFIG,
 });
