@@ -1,12 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
-import { WeatherTrigger } from 'src/weather-trigger/schema/weather-trigger.schema';
+import { ExcludeProperty } from 'nestjs-mongoose-exclude';
+import { WeatherTrigger } from '../../../src/weather-trigger/schema/weather-trigger.schema';
 
 @Schema({ timestamps: true })
 export class User {
   @Prop({ required: true, unique: true })
   username: string;
 
+  @ExcludeProperty()
   @Prop({ required: true })
   password: string;
 

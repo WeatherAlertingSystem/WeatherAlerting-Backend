@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { WeatherTrigger } from 'src/weather-trigger/schema/weather-trigger.schema';
+import { WeatherTrigger } from '../../../src/weather-trigger/schema/weather-trigger.schema';
 
 @Injectable()
 export class NotifierService {
