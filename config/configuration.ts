@@ -8,8 +8,10 @@ export default () => ({
     sslCA: process.env.DB_SSL_CA_FILE_PATH,
     connectTimeoutMS: 1000,
   },
-  weatherApi: {
-    baseUrl: 'https://api.openweathermap.org/data/2.5/forecast',
+  openWeather: {
+    fiveDayWeatherForecastUrl:
+      'https://api.openweathermap.org/data/2.5/forecast',
+    geocodingUrl: 'http://api.openweathermap.org/geo/1.0/direct',
     apiKey: process.env.WEATHERAPI_APIKEY,
   },
   jwtModule: {
