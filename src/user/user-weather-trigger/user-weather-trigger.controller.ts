@@ -9,6 +9,7 @@ import {
   Post,
   Req,
 } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/auth/models/role.enum';
@@ -21,6 +22,7 @@ import {
 import { WeatherTriggerService } from 'src/weather-trigger/weather-trigger.service';
 import { UserService } from '../user.service';
 
+@ApiBearerAuth()
 @Roles(Role.USER)
 @Controller('user/weather-trigger')
 export class UserWeatherTriggerController {

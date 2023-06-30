@@ -1,3 +1,4 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsAlphanumeric,
   IsEmail,
@@ -9,9 +10,11 @@ import {
 } from 'class-validator';
 import { WeatherTrigger } from '../../../src/weather-trigger/schema/weather-trigger.schema';
 export class CreateUserDto {
+  @ApiProperty()
   @IsNotEmpty()
   @IsAlphanumeric()
   username: string;
+  @ApiProperty()
   @IsStrongPassword({
     minLength: 8,
     minLowercase: 1,
@@ -20,8 +23,10 @@ export class CreateUserDto {
     minUppercase: 1,
   })
   password: string;
+  @ApiProperty()
   @IsEmail()
   email: string;
+  @ApiPropertyOptional()
   @IsOptional()
   @IsPhoneNumber()
   phone_number: string;

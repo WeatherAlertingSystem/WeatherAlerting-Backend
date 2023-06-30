@@ -7,6 +7,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 import { SanitizeMongooseModelInterceptor } from 'nestjs-mongoose-exclude';
 import { Public } from '../../src/auth/auth.guard';
 import { Roles } from '../../src/auth/decorators/roles.decorator';
@@ -41,6 +42,7 @@ export class UserController {
 
   @Roles(Role.USER)
   @UseGuards(RolesGuard)
+  @ApiBearerAuth()
   @Get('me')
   async findMe(@Req() request): Promise<User> {
     return this.userService.findOne(request.payload.username);
