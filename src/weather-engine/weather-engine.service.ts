@@ -32,8 +32,8 @@ export class WeatherEngineService {
   }
 
   async getWeather(location: string): Promise<any> {
-    const baseUrl = this.config.get('weatherApi.baseUrl');
-    const apiKey = this.config.get('weatherApi.apiKey');
+    const baseUrl = this.config.get('openWeather.fiveDayWeatherForecastUrl');
+    const apiKey = this.config.get('openWeather.apiKey');
     const { lat, lon } = await this.geocodingService.getCoordinatesForLocation(
       location,
     );

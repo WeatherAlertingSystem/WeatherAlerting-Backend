@@ -1,9 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
+export enum NotificationChannels {
+  EMAIL = 'email',
+  SMS = 'sms',
+}
+
 @Schema()
 export class WeatherNotification {
   @Prop()
-  channel: string;
+  channel: NotificationChannels;
 
   @Prop()
   recipient: string;

@@ -1,3 +1,4 @@
+import { MailerModule } from '@nestjs-modules/mailer';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule, MongooseOptionsFactory } from '@nestjs/mongoose';
@@ -25,6 +26,12 @@ import { WeatherTriggerModule } from './weather-trigger/weather-trigger.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => config.get('logger'),
+    }),
+    MailerModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) =>
+        config.get('mailing.nodemailerConfig'),
     }),
     ScheduleModule.forRoot(),
     UserModule,

@@ -26,6 +26,7 @@ WORKDIR /usr/src/weather-alerting-backend
 
 # Copy all from development stage
 COPY --from=development /usr/src/weather-alerting-backend .
+COPY --from=development /etc/ssl/rds-combined-ca-bundle.pem /etc/ssl/rds-combined-ca-bundle.pem
 
 EXPOSE 3000
 

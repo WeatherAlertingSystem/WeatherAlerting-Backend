@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose, { HydratedDocument, Types } from 'mongoose';
 import { TriggerConditions } from '../models/weather-trigger-conditions.enum';
 import { TriggerTypes } from '../models/weather-trigger-types.enum';
 import {
@@ -6,8 +7,13 @@ import {
   WeatherNotificationSchema,
 } from './weather-notification.schema';
 
+export type WeatherTriggerDocument = HydratedDocument<WeatherTrigger>;
+
 @Schema({ timestamps: true })
 export class WeatherTrigger {
+  @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  subscriberId: Types.ObjectId;
+
   @Prop({ required: true })
   name: string;
 

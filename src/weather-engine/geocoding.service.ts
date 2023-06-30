@@ -13,8 +13,9 @@ export class GeocodingService {
   async getCoordinatesForLocation(
     location: string,
   ): Promise<{ lat: number; lon: number }> {
-    const apiKey = this.config.get('weatherApi.apiKey');
-    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${apiKey}`;
+    const baseUrl = this.config.get('openWeather.geocodingUrl');
+    const apiKey = this.config.get('openWeather.apiKey');
+    const url = `${baseUrl}?q=${location}&limit=1&appid=${apiKey}`;
     // const [{ lat, lon }] = await firstValueFrom(this.httpService.get(url));
     const { data } = await firstValueFrom(this.httpService.get(url));
     // console.log(res);

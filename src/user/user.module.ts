@@ -5,6 +5,7 @@ import { WeatherTriggerModule } from '../../src/weather-trigger/weather-trigger.
 import { User, UserSchema } from './schema/user.schema';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
+import { UserWeatherTriggerController } from './user-weather-trigger/user-weather-trigger.controller';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { UserService } from './user.service';
     WeatherTriggerModule,
     ConfigModule,
   ],
-  controllers: [UserController],
+  controllers: [UserController, UserWeatherTriggerController],
   providers: [UserService],
   exports: [UserService],
 })
